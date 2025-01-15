@@ -1,7 +1,24 @@
-local lsp = vim.g.lazyvim_python_lsp or 'pyright'
-local ruff = vim.g.lazyvim_python_ruff or 'ruff'
+local lsp = 'pyright'
+local ruff = 'ruff'
 
 return {
+  recommended = function()
+    return vim.extras.wants {
+      ft = 'python',
+      root = {
+        'pyproject.toml',
+        'setup.py',
+        'setup.cfg',
+        'requirements.txt',
+        'Pipfile',
+        'pyrightconfig.json',
+      },
+    }
+  end,
+  {
+    'nvim-treesitter/nvim-treesitter',
+    opts = { ensure_installed = { 'ninja', 'rst' } },
+  },
   {
     'neovim/nvim-lspconfig',
     opts = {
@@ -71,6 +88,7 @@ return {
       end,
     },
   },
+
   {
     'linux-cultist/venv-selector.nvim',
     branch = 'regexp', -- Use this branch for the new version
@@ -89,6 +107,7 @@ return {
 
   {
     'hrsh7th/nvim-cmp',
+    optional = true,
     opts = function(_, opts)
       opts.auto_brackets = opts.auto_brackets or {}
       table.insert(opts.auto_brackets, 'python')

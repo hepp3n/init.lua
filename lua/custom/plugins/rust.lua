@@ -1,23 +1,24 @@
+local diagnostics = 'rust-analyzer'
+
 return {
-  -- Extend auto completion
+
+  -- LSP for Cargo.toml
   {
-    'hrsh7th/nvim-cmp',
-    dependencies = {
-      {
-        'Saecki/crates.nvim',
-        event = { 'BufRead Cargo.toml' },
-        opts = {
-          completion = {
-            cmp = { enabled = true },
-          },
+    'Saecki/crates.nvim',
+    event = { 'BufRead Cargo.toml' },
+    opts = {
+      completion = {
+        crates = {
+          enabled = true,
         },
       },
+      lsp = {
+        enabled = true,
+        actions = true,
+        completion = true,
+        hover = true,
+      },
     },
-    ---@param opts cmp.ConfigSchema
-    opts = function(_, opts)
-      opts.sources = opts.sources or {}
-      table.insert(opts.sources, { name = 'crates' })
-    end,
   },
 
   -- Add Rust & related to treesitter
@@ -30,12 +31,18 @@ return {
   {
     'williamboman/mason.nvim',
     optional = true,
-    opts = { ensure_installed = { 'codelldb' } },
+    opts = function(_, opts)
+      opts.ensure_installed = opts.ensure_installed or {}
+      vim.list_extend(opts.ensure_installed, { 'codelldb' })
+      if diagnostics == 'bacon-ls' then
+        vim.list_extend(opts.ensure_installed, { 'bacon' })
+      end
+    end,
   },
 
   {
     'mrcjkb/rustaceanvim',
-    version = '^4', -- Recommended
+    version = vim.fn.has 'nvim-0.10.0' == 0 and '^4' or false,
     ft = { 'rust' },
     opts = {
       server = {
@@ -57,8 +64,12 @@ return {
                 enable = true,
               },
             },
-            -- Add clippy lints for Rust.
-            checkOnSave = true,
+            -- Add clippy lints for Rust if using rust-analyzer
+            checkOnSave = diagnostics == 'rust-analyzer',
+            -- Enable diagnostics if using rust-analyzer
+            diagnostics = {
+              enable = diagnostics == 'rust-analyzer',
+            },
             procMacro = {
               enable = true,
               ignored = {
@@ -67,14 +78,39 @@ return {
                 ['async-recursion'] = { 'async_recursion' },
               },
             },
+            files = {
+              excludeDirs = {
+                '.direnv',
+                '.git',
+                '.github',
+                '.gitlab',
+                'bin',
+                'node_modules',
+                'target',
+                'venv',
+                '.venv',
+              },
+            },
           },
         },
       },
     },
     config = function(_, opts)
+      if vim.has 'mason.nvim' then
+        local package_path = require('mason-registry').get_package('codelldb'):get_install_path()
+        local codelldb = package_path .. '/extension/adapter/codelldb'
+        local library_path = package_path .. '/extension/lldb/lib/liblldb.dylib'
+        local uname = io.popen('uname'):read '*l'
+        if uname == 'Linux' then
+          library_path = package_path .. '/extension/lldb/lib/liblldb.so'
+        end
+        opts.dap = {
+          adapter = require('rustaceanvim.config').get_codelldb_adapter(codelldb, library_path),
+        }
+      end
       vim.g.rustaceanvim = vim.tbl_deep_extend('keep', vim.g.rustaceanvim or {}, opts or {})
       if vim.fn.executable 'rust-analyzer' == 0 then
-        vim.notify('**rust-analyzer** not found in PATH, please install it.\nhttps://rust-analyzer.github.io/', vim.log.levels.ERROR)
+        vim.error('**rust-analyzer** not found in PATH, please install it.\nhttps://rust-analyzer.github.io/', { title = 'rustaceanvim' })
       end
     end,
   },
@@ -84,21 +120,10 @@ return {
     'neovim/nvim-lspconfig',
     opts = {
       servers = {
-        taplo = {
-          keys = {
-            {
-              'K',
-              function()
-                if vim.fn.expand '%:t' == 'Cargo.toml' and require('crates').popup_available() then
-                  require('crates').show_popup()
-                else
-                  vim.lsp.buf.hover()
-                end
-              end,
-              desc = 'Show Crate Documentation',
-            },
-          },
+        bacon_ls = {
+          enabled = diagnostics == 'bacon-ls',
         },
+        rust_analyzer = { enabled = false },
       },
     },
   },
