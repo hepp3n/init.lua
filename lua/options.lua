@@ -14,4 +14,4 @@ vim.o.undodir = os.getenv 'HOME' .. '/.nvim/undodir'
 
 
 -- local o = vim.o
--- o.cursorlineopt ='both' -- to enable cursorline!
+vim.o.cursorlineopt ='both' -- to enable cursorline!
