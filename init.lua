@@ -879,6 +879,10 @@ require('lazy').setup({
     'navarasu/onedark.nvim',
     priority = 1000, -- Make sure to load this before all the other start plugins.
     config = function()
+      require('onedark').setup {
+        transparent = false,
+      }
+
       ---@diagnostic disable-next-line: missing-fields
       vim.cmd.colorscheme 'onedark'
     end,
