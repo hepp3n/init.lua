@@ -162,7 +162,7 @@ vim.opt.scrolloff = 10
 vim.opt.confirm = true
 
 vim.cmd [[
-  colorscheme vim
+  colorscheme lunaperche
 
   highlight Normal guibg=none
   highlight NonText guibg=none
