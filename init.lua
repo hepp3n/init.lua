@@ -161,16 +161,16 @@ vim.opt.scrolloff = 10
 -- See `:help 'confirm'`
 vim.opt.confirm = true
 
-vim.cmd [[
-  colorscheme vim
+vim.diagnostic.config {
+  -- Use the default configuration
+  virtual_lines = true,
 
-  highlight Normal guibg=none
-  highlight NonText guibg=none
-  highlight Normal ctermbg=none
-  highlight NonText ctermbg=none
-
-  set notermguicolors
-]]
+  -- Alternatively, customize specific options
+  -- virtual_lines = {
+  --  -- Only show virtual line diagnostics for the current cursor line
+  --  current_line = true,
+  -- },
+}
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
