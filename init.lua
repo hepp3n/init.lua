@@ -161,6 +161,10 @@ vim.opt.scrolloff = 10
 -- See `:help 'confirm'`
 vim.opt.confirm = true
 
+vim.cmd [[
+  highlight Normal ctermbg=NONE guibg=NONE
+]]
+
 vim.diagnostic.config {
   -- Use the default configuration
   virtual_lines = true,
