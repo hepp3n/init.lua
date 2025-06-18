@@ -162,6 +162,7 @@ vim.opt.scrolloff = 10
 vim.opt.confirm = true
 
 vim.cmd [[
+  colorscheme default
   highlight Normal ctermbg=NONE guibg=NONE
 ]]
 
