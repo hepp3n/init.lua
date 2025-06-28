@@ -91,7 +91,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = true
+vim.g.have_nerd_font = false
 
 -- [[ Setting options ]]
 -- See `:help vim.opt`
@@ -161,18 +161,12 @@ vim.opt.scrolloff = 10
 -- See `:help 'confirm'`
 vim.opt.confirm = true
 
+vim.o.background = 'light'
+
 vim.cmd [[
   colorscheme default
   highlight Normal ctermbg=NONE guibg=NONE
 ]]
-
-vim.diagnostic.config {
-  -- Alternatively, customize specific options
-  virtual_lines = {
-    --  -- Only show virtual line diagnostics for the current cursor line
-    current_line = true,
-  },
-}
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
