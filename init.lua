@@ -161,13 +161,6 @@ vim.opt.scrolloff = 10
 -- See `:help 'confirm'`
 vim.opt.confirm = true
 
-vim.o.background = 'light'
-
-vim.cmd [[
-  colorscheme default
-  highlight Normal ctermbg=NONE guibg=NONE
-]]
-
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
@@ -677,6 +670,8 @@ require('lazy').setup({
         superhtml = {},
         eslint = {},
         taplo = {},
+        bashls = {},
+        markdownlint = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
