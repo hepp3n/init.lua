@@ -90,8 +90,12 @@ P.S. You can delete this when you're done too. It's your config now! :)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+vim.keymap.set('n', '<C-f>', '<cmd>silent !tmux neww tmux-sessionizer<CR>')
+vim.keymap.set('n', '<M-z>', '<cmd>silent !tmux neww tmux-sessionizer -s 1<CR>')
+vim.keymap.set('n', '<M-c>', '<cmd>silent !tmux neww tmux-sessionizer -s 2<CR>')
+
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
@@ -675,10 +679,13 @@ require('lazy').setup({
       local servers = {
         clangd = {},
         gopls = {},
+        zls = {},
+        rust_analyzer = {},
         pyright = {},
         lemminx = {},
         superhtml = {},
         eslint = {},
+        biome = {},
         taplo = {},
         bashls = {},
         markdownlint = {},
@@ -725,6 +732,8 @@ require('lazy').setup({
         'stylua', -- Used to format Lua code
         'gofumpt',
         'goimports',
+        'htmlbeautifier',
+        'prettier',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
