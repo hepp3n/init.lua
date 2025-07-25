@@ -4,6 +4,36 @@
 -- See the kickstart.nvim README for more information
 return {
   {
+    'scottmckendry/cyberdream.nvim',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require('cyberdream').setup {
+        transparent = true,
+      }
+
+      vim.cmd 'colorscheme cyberdream'
+    end,
+  },
+  -- {
+  --   'rose-pine/neovim',
+  --   name = 'rose-pine',
+  --   config = function()
+  --     require('rose-pine').setup {
+  --       variant = 'moon', -- auto, main, moon, or dawn
+  --       dark_variant = 'moon', -- main, moon, or dawn
+  --
+  --       styles = {
+  --         bold = true,
+  --         italic = true,
+  --         transparency = true,
+  --       },
+  --     }
+  --
+  --     vim.cmd 'colorscheme rose-pine-moon'
+  --   end,
+  -- },
+  {
     'mbbill/undotree',
     config = function()
       vim.keymap.set('n', '<leader><F5>', vim.cmd.UndotreeToggle, { desc = 'UndoTree' })
