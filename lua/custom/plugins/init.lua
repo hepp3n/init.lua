@@ -1,17 +1,5 @@
 return {
   {
-    'scottmckendry/cyberdream.nvim',
-    lazy = false,
-    priority = 1000,
-    config = function()
-      require('cyberdream').setup {
-        transparent = true,
-      }
-
-      vim.cmd 'colorscheme cyberdream'
-    end,
-  },
-  {
     'copilotlsp-nvim/copilot-lsp',
     init = function()
       vim.g.copilot_nes_debounce = 500
@@ -25,7 +13,7 @@ return {
   {
     'mbbill/undotree',
     config = function()
-      vim.keymap.set('n', '<leader><F5>', vim.cmd.UndotreeToggle, { desc = 'UndoTree' })
+      vim.keymap.set('n', '<leader><F4>', vim.cmd.UndotreeToggle, { desc = 'UndoTree' })
     end,
   },
 

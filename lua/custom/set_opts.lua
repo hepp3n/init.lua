@@ -42,8 +42,9 @@ vim.opt.scrolloff = 25
 vim.opt.confirm = true
 
 -- vim.o.background = 'dark'
---
--- vim.cmd [[
---   colorscheme default
---   highlight Normal ctermbg=NONE guibg=NONE
--- ]]
+
+vim.cmd [[
+  colorscheme lunaperche
+  highlight Normal ctermbg=NONE guibg=NONE
+  highlight EndOfBuffer guibg=NONE ctermbg=NONE
+]]

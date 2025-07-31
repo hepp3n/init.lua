@@ -12,7 +12,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
-local root = vim.fn.fnamemodify('./.repro', ':p')
+local root = vim.env['HOME'] .. '/dotfiles/nvim/.repro'
 
 -- set stdpaths to use .repro
 for _, name in ipairs { 'config', 'data', 'state', 'cache' } do
@@ -450,13 +450,9 @@ require('lazy').setup({
   require 'kickstart.plugins.lint',
   require 'kickstart.plugins.autopairs',
   require 'kickstart.plugins.oil',
-  require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
+  require 'kickstart.plugins.gitsigns',
 
-  -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
-  --    This is the easiest way to modularize your config.
-  --
   { import = 'custom.plugins' },
-  --
 }, {
   ui = {
     icons = vim.g.have_nerd_font and {} or {
