@@ -12,7 +12,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
-local root = vim.env['HOME'] .. '/dotfiles/nvim/.repro'
+local root = vim.env['XDG_CONFIG_HOME'] .. '/nvim/.repro'
 
 -- set stdpaths to use .repro
 for _, name in ipairs { 'config', 'data', 'state', 'cache' } do
