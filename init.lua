@@ -37,3 +37,7 @@ opt.title = true
 opt.titlestring = '%t%( %M%)%( (%{expand("%:~:h")})%)%a (nvim)'
 
 opt.undofile = true
+
+opt.scrolloff = 12
+
+opt.cursorline = true
