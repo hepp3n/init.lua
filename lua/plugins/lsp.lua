@@ -104,28 +104,25 @@ return {
 						},
 					},
 				},
-				glsl_analyzer = true,
+				glsl_analyzer = { true, manual_install = true },
 				lua_ls = {
 					cmd = { "lua-language-server" },
-					-- server_capabilities = {
-					--   semanticTokensProvider = vim.NIL,
-					-- },
 				},
-				templ = true,
-				taplo = true,
+				templ = { true, manual_install = true },
+				taplo = { true, manual_install = true },
 
-				pyright = true,
+				pyright = { true, manual_install = true },
 				ruff = { manual_install = true },
-				-- mojo = { manual_install = true },
 
 				-- Enabled biome formatting, turn off all the other ones generally
-				biome = true,
+				biome = { true, manual_install = true },
 				ts_ls = {
 					root_dir = require("lspconfig").util.root_pattern("package.json"),
 					single_file = false,
 					server_capabilities = {
 						documentFormattingProvider = false,
 					},
+					manual_install = true,
 				},
 				jsonls = {
 					server_capabilities = {
@@ -137,12 +134,14 @@ return {
 							validate = { enable = true },
 						},
 					},
+					manual_install = true,
 				},
 
 				cssls = {
 					server_capabilities = {
 						documentFormattingProvider = false,
 					},
+					manual_install = true,
 				},
 
 				yamlls = {
@@ -155,6 +154,7 @@ return {
 							-- schemas = require("schemastore").yaml.schemas(),
 						},
 					},
+					manual_install = true,
 				},
 
 				clangd = {
@@ -164,6 +164,8 @@ return {
 					init_options = { clangdFileStatus = true },
 
 					filetypes = { "c" },
+
+					manual_install = true,
 				},
 
 				tailwindcss = {
@@ -199,6 +201,7 @@ return {
 							},
 						},
 					},
+					manual_install = true,
 				},
 			}
 
@@ -215,7 +218,7 @@ return {
 			local ensure_installed = {
 				"stylua",
 				"lua_ls",
-				"delve",
+				-- "delve",
 			}
 
 			vim.list_extend(ensure_installed, servers_to_install)
