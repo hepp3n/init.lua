@@ -7,7 +7,24 @@ return {
 		config = function()
 			local group = vim.api.nvim_create_augroup("custom-treesitter", { clear = true })
 
-			require("nvim-treesitter").setup()
+			require("nvim-treesitter").setup({
+				ensure_installed = {
+					"bash",
+					"c",
+					"cpp",
+					"css",
+					"html",
+					"javascript",
+					"json",
+					"lua",
+					"php",
+					"python",
+					"rust",
+					"typescript",
+					"yaml",
+					"jsonc",
+				},
+			})
 
 			local syntax_on = {
 				php = true,

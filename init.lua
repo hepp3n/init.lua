@@ -41,3 +41,5 @@ opt.undofile = true
 opt.scrolloff = 12
 
 opt.cursorline = true
+
+vim.api.nvim_set_keymap("t", "<Leader><ESC>", "<C-\\><C-n>", { noremap = true })
