@@ -37,8 +37,6 @@ return {
 						formatters_by_ft = {
 							lua = { "stylua" },
 							blade = { "blade-formatter" },
-							ocaml = { "ml-format" },
-							ocaml_mlx = { "ocamlformat_mlx" },
 						},
 					})
 
