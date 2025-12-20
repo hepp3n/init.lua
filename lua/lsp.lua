@@ -5,6 +5,7 @@ vim.lsp.enable({
     "ts_ls",
     "rust_analyzer",
     "zls",
+    "docker",
 })
 
 vim.diagnostic.config({ virtual_text = true })

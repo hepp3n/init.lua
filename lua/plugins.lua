@@ -3,6 +3,7 @@ vim.pack.add({
     { src = "https://github.com/mason-org/mason.nvim" },
     { src = "https://github.com/saghen/blink.cmp",       version = vim.version.range("^1") },
     { src = "https://github.com/stevearc/conform.nvim" },
+    { src = "https://codeberg.org/mfussenegger/nvim-dap" },
 })
 
 require('gitsigns').setup({ signcolumn = false })
