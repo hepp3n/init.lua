@@ -28,6 +28,12 @@ opt.undofile       = true
 opt.completeopt    = { "menuone", "popup", "noinsert" }
 opt.hlsearch       = false
 
+vim.schedule(function()
+  opt.clipboard = 'unnamedplus'
+end)
+
+opt.updatetime = 250
+opt.timeoutlen = 300
 
 vim.g.netrw_liststyle = 1
 vim.g.netrw_sort_by = "size"
