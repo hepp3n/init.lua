@@ -1,13 +1,19 @@
 vim.pack.add({
     { src = "https://github.com/lewis6991/gitsigns.nvim" },
+    { src = "https://github.com/j-hui/fidget.nvim" },
     { src = "https://github.com/mason-org/mason.nvim" },
-    { src = "https://github.com/saghen/blink.cmp",       version = vim.version.range("^1") },
+    { src = "https://github.com/saghen/blink.cmp" },
     { src = "https://github.com/stevearc/conform.nvim" },
     { src = "https://codeberg.org/mfussenegger/nvim-dap" },
+    { src = "https://github.com/milanglacier/minuet-ai.nvim" },
+    { src = "https://github.com/nvim-lua/plenary.nvim" },
+    { src = "https://github.com/nvim-telescope/telescope.nvim" },
+    { src = "https://github.com/nvim-telescope/telescope-fzf-native.nvim" },
 })
 
 require('gitsigns').setup({ signcolumn = false })
 require('mason').setup({})
+require("fidget").setup({})
 
 require('blink.cmp').setup({
     fuzzy = { implementation = 'prefer_rust_with_warning' },
@@ -63,3 +69,39 @@ require("conform").setup({
         lsp_format = "fallback",
     },
 })
+
+require('minuet').setup {
+    virtualtext = {
+        auto_trigger_ft = { "lua", "bash", "rust", "go", "zig", "python", "javascript" },
+    },
+    blink = {
+        enable_auto_complete = true,
+    },
+    provider = 'gemini',
+    provider_options = {
+        gemini = {
+            model = 'gemini-2.5-flash', -- Use Flash for speed or Pro for accuracy
+            api_key = "GEMINI_API_KEY",
+            optional = {
+                generationConfig = {
+                    maxOutputTokens = 256,
+                    -- When using `gemini-2.5-flash`, it is recommended to entirely
+                    -- disable thinking for faster completion retrieval.
+                    thinkingConfig = {
+                        thinkingBudget = 0,
+                    },
+                },
+                safetySettings = {
+                    {
+                        -- HARM_CATEGORY_HATE_SPEECH,
+                        -- HARM_CATEGORY_HARASSMENT
+                        -- HARM_CATEGORY_SEXUALLY_EXPLICIT
+                        category = 'HARM_CATEGORY_DANGEROUS_CONTENT',
+                        -- BLOCK_NONE
+                        threshold = 'BLOCK_ONLY_HIGH',
+                    },
+                },
+            },
+        },
+    },
+}
