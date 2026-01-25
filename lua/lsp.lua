@@ -1,12 +1,14 @@
 vim.lsp.enable({
     "bashls",
+    "clangd",
     "gopls",
     "lua_ls",
     "ts_ls",
     "jsonls",
     "rust_analyzer",
     "zls",
-    "docker",
+    "dockerls",
+    "docker_language_sever",
     "taplo",
     "yamlls"
 })
