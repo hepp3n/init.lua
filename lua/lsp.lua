@@ -8,7 +8,6 @@ vim.lsp.enable({
     "rust_analyzer",
     "zls",
     "dockerls",
-    "docker_language_sever",
     "taplo",
     "yamlls"
 })
